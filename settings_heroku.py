@@ -27,6 +27,10 @@ SECRET = 'foobar'
 SECRET_KEY = 'my-session-secret'
 
 SQLALCHEMY_DATABASE_URI = 'postgresql://pybossa:tester@localhost/pybossa'
+# Heroku
+env_database_url = os.environ.get('DATABASE_URL')
+if env_database_url:
+    REDIS_SENTINEL = env_database_url.replace('postgres://', 'postgresql://')
 ITSDANGEROUSKEY = 'its-dangerous-key'
 
 ## project configuration
