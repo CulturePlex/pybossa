@@ -2,3 +2,4 @@
 
 -e git+https://github.com/Hypernode/M2Crypto.git#egg=M2Crypto-0.22.dev
 -e .
+gunicorn==18.0
