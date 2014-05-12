@@ -1,1 +1,1 @@
-web: python pybossa/web.py
+web: gunicorn run:app
