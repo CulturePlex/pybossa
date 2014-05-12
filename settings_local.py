@@ -17,7 +17,7 @@
 # along with PyBossa.  If not, see <http://www.gnu.org/licenses/>.
 import os
 
-# DEBUG = False
+DEBUG = False
 
 ## webserver host and port
 # HOST = '0.0.0.0'
@@ -27,18 +27,23 @@ SECRET = 'foobar'
 SECRET_KEY = 'my-session-secret'
 
 SQLALCHEMY_DATABASE_URI = 'postgresql://pybossa:tester@localhost/pybossa'
+# Heroku
+env_database_url = os.environ.get('DATABASE_URL')
+if env_database_url:
+    SQLALCHEMY_DATABASE_URI = env_database_url.replace('postgres://',
+                                                       'postgresql://')
 ITSDANGEROUSKEY = 'its-dangerous-key'
 
 ## project configuration
-BRAND = 'PyBossa'
-TITLE = 'PyBossa'
+BRAND = 'CulturePlex'
+TITLE = 'CulturePlex\'s crowd-sourcing platform'
 LOGO = 'default_logo.png'
-COPYRIGHT = 'Set Your Institution'
-DESCRIPTION = 'Set the description in your config'
+COPYRIGHT = 'CulturePlex Lab.'
+DESCRIPTION = ''
 TERMSOFUSE = 'http://okfn.org/terms-of-use/'
 DATAUSE = 'http://opendatacommons.org/licenses/by/'
-CONTACT_EMAIL = 'info@pybossa.com'
-CONTACT_TWITTER = 'PyBossa'
+CONTACT_EMAIL = 'admin@cultureplex.ca'
+CONTACT_TWITTER = 'cultureplex'
 
 ## Default number of apps per page
 ## APPS_PER_PAGE = 20
@@ -91,7 +96,7 @@ MAIL_DEFAULT_SENDER = 'PyBossa Support <info@pybossa.com>'
 ## Enforce Privacy Mode, by default is disabled
 ## This config variable will disable all related user pages except for admins
 ## Stats, top users, leaderboard, etc
-ENFORCE_PRIVACY = False
+ENFORCE_PRIVACY = True
 
 
 ## Cache setup. By default it is enabled
