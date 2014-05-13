@@ -313,9 +313,11 @@ def task_presenter_editor(short_name):
         title = app_title(app, "Task Presenter Editor")
         require.app.read(app)
         require.app.update(app)
-
         form = TaskPresenterForm(request.form)
-        if request.method == 'POST' and form.validate():
+
+        is_valid_form = form.validate()
+        if (request.method == 'POST' and is_valid_form
+                or form.errors.keys() == ['id']):
             db_app = db.session.query(model.app.App).filter_by(id=app.id).first()
             db_app.info['task_presenter'] = form.editor.data
             db.session.add(db_app)
@@ -326,9 +328,9 @@ def task_presenter_editor(short_name):
             return redirect(url_for('.tasks', short_name=app.short_name))
 
         # It does not have a validation
-        is_valid_form = form.validate
+        is_valid_form = form.validate()
         if (request.method == 'POST' and not is_valid_form
-                and form.errors.keys() != ['id']):  # pragma: no cover
+            and form.errors.keys() != ['id']):  # pragma: no cover
             flash(gettext('Please correct the errors'), 'error')
             errors = True
 
