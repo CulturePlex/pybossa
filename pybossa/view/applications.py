@@ -326,7 +326,9 @@ def task_presenter_editor(short_name):
             return redirect(url_for('.tasks', short_name=app.short_name))
 
         # It does not have a validation
-        if request.method == 'POST' and not form.validate():  # pragma: no cover
+        is_valid_form = form.validate
+        if (request.method == 'POST' and not is_valid_form
+                and form.errors.keys() != ['id']):  # pragma: no cover
             flash(gettext('Please correct the errors'), 'error')
             errors = True
 
