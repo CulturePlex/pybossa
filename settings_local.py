@@ -23,8 +23,8 @@ DEBUG = False
 # HOST = '0.0.0.0'
 # PORT = 5000
 
-SECRET = 'foobar'
-SECRET_KEY = 'my-session-secret'
+SECRET = os.environ.get('SECRET', 'foobar')
+SECRET_KEY = os.environ.get('SECRET_KEY', 'my-session-secret')
 
 SQLALCHEMY_DATABASE_URI = 'postgresql://pybossa:tester@localhost/pybossa'
 # Heroku
@@ -32,10 +32,10 @@ env_database_url = os.environ.get('DATABASE_URL')
 if env_database_url:
     SQLALCHEMY_DATABASE_URI = env_database_url.replace('postgres://',
                                                        'postgresql://')
-ITSDANGEROUSKEY = 'its-dangerous-key'
+ITSDANGEROUSKEY = os.environ.get('ITSDANGEROUSKEY', 'its-dangerous-key')
 
 ## project configuration
-BRAND = 'CulturePlex'
+BRAND = 'CulturePlex Bossa'
 TITLE = 'CulturePlex\'s crowd-sourcing platform'
 LOGO = 'default_logo.png'
 COPYRIGHT = 'CulturePlex Lab.'
@@ -55,6 +55,18 @@ CONTACT_TWITTER = 'cultureplex'
 # FACEBOOK_APP_SECRET=''
 # GOOGLE_CLIENT_ID=''
 # GOOGLE_CLIENT_SECRET=''
+if ('TWITTER_CONSUMER_KEY' in os.environ
+        and 'TWITTER_CONSUMER_SECRET' in os.environ):
+    TWITTER_CONSUMER_KEY = os.environ.get('TWITTER_CONSUMER_KEY')
+    TWITTER_CONSUMER_SECRET = os.environ.get('TWITTER_CONSUMER_SECRET')
+if ('FACEBOOK_APP_ID' in os.environ
+        and 'FACEBOOK_APP_SECRET' in os.environ):
+    FACEBOOK_APP_ID = os.environ.get('FACEBOOK_APP_ID')
+    FACEBOOK_APP_SECRET = os.environ.get('FACEBOOK_APP_SECRET')
+if ('GOOGLE_CLIENT_ID' in os.environ
+        and 'GOOGLE_CLIENT_SECRET' in os.environ):
+    GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID')
+    GOOGLE_CLIENT_SECRET = os.environ.get('GOOGLE_CLIENT_SECRET')
 
 ## Supported Languages
 
@@ -78,10 +90,10 @@ LOCALES = ['en', 'es', 'fr']
 # LOG_LEVEL = logging.DEBUG
 
 ## Mail setup
-MAIL_SERVER = 'localhost'
-MAIL_USERNAME = None
-MAIL_PASSWORD = None
-MAIL_PORT = 25
+MAIL_SERVER = os.environ.get('MAIL_SERVER', 'localhost')
+MAIL_USERNAME = os.environ.get('MAIL_USERNAME', None)
+MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD', None)
+MAIL_PORT = os.environ.get('MAIL_PORT', 25)
 MAIL_FAIL_SILENTLY = False
 MAIL_DEFAULT_SENDER = 'PyBossa Support <info@pybossa.com>'
 
