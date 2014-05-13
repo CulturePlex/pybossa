@@ -266,7 +266,9 @@ def new():
     if request.method != 'POST':
         return respond(False)
 
-    if not form.validate():
+    # Weird, 'id' is marked as empty even when it has a value
+    is_valid_form = form.validate
+    if not is_valid_form and form.errors.keys() != ['id']:
         flash(gettext('Please correct the errors'), 'error')
         return respond(True)
 
