@@ -51,7 +51,8 @@ def create_app():
                         #force_default=False, force_lower=False)
     setup_db(app)
     mail.init_app(app)
-    sentinel.init_app(app)
+    if sentinel is not None:
+        sentinel.init_app(app)
     signer.init_app(app)
     if app.config.get('SENTRY_DSN'): # pragma: no cover
         sentr = Sentry(app)

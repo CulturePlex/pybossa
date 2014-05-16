@@ -114,7 +114,7 @@ ENFORCE_PRIVACY = True
 ## Cache setup. By default it is enabled
 ## Redis Sentinel
 # List of Sentinel servers (IP, port)
-REDIS_CACHE_ENABLED = True
+REDIS_CACHE_ENABLED = False
 REDIS_SENTINEL = [('localhost', 26379)]
 # Heroku
 env_sentinel = os.environ.get('REDISCLOUD_URL')

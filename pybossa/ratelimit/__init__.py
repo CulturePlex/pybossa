@@ -81,6 +81,8 @@ def ratelimit(limit, per=300, send_x_headers=True,
     def decorator(f):
         @wraps(f)
         def rate_limited(*args, **kwargs):
+            if sentinel is None:
+                return f(*args, **kwargs)
             try:
                 key = 'rate-limit/%s/%s/' % (key_func(), scope_func())
                 rlimit = RateLimit(key, limit, per, send_x_headers)

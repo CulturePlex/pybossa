@@ -16,12 +16,16 @@ The objects are:
     * csrf: for CSRF protection
 
 """
+import os
 __all__ = ['sentinel', 'signer', 'mail', 'login_manager', 'facebook',
            'twitter', 'google', 'misaka', 'babel', 'gravatar',
            'uploader', 'csrf']
 # CACHE
-from pybossa.sentinel import Sentinel
-sentinel = Sentinel()
+if os.environ.get("PYBOSSA_REDIS_CACHE_DISABLED", None) is None:
+    from pybossa.sentinel import Sentinel
+    sentinel = Sentinel()
+else:
+    sentinel = None
 
 # Signer
 from pybossa.signer import Signer
