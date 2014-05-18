@@ -95,7 +95,7 @@ MAIL_USERNAME = os.environ.get('MAIL_USERNAME', None)
 MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD', None)
 MAIL_PORT = os.environ.get('MAIL_PORT', 25)
 MAIL_FAIL_SILENTLY = False
-MAIL_DEFAULT_SENDER = 'PyBossa Support <info@pybossa.com>'
+MAIL_DEFAULT_SENDER = 'Bossa CulturePlex <bossa@cultureplex.ca>'
 
 ## Announcement messages
 ## Use any combination of the next type of messages: root, user, and app owners
