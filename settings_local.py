@@ -17,7 +17,7 @@
 # along with PyBossa.  If not, see <http://www.gnu.org/licenses/>.
 import os
 
-DEBUG = False
+DEBUG = True
 
 ## webserver host and port
 # HOST = '0.0.0.0'
@@ -128,7 +128,8 @@ ALLOWED_EXTENSIONS = ['js', 'css', 'png', 'jpg', 'jpeg', 'gif']
 
 ## If you want to use the local uploader configure which folder
 UPLOAD_METHOD = 'local'
-UPLOAD_FOLDER = 'uploads'
+# It fails when a relative directory is specified
+UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), 'uploads')
 
 ## If you want to use Rackspace for uploads, configure it here
 # RACKSPACE_USERNAME = 'username'

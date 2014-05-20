@@ -424,19 +424,20 @@ def update_profile():
         upload_form = AvatarUploadForm(request.form)
         form.set_locales(current_app.config['LOCALES'])
         if request.form['btn'] == 'Upload':
-            file = request.files['avatar']
+            avatar = request.files['avatar']
+            extension = avatar.filename.rsplit(".")[1]
             coordinates = (upload_form.x1.data, upload_form.y1.data,
                            upload_form.x2.data, upload_form.y2.data)
             prefix = time.time()
-            file.filename = "%s_avatar.png" % prefix
+            avatar.filename = "%s_avatar.%s" % (prefix, extension)
             container = "user_%s" % current_user.id
-            uploader.upload_file(file,
+            uploader.upload_file(avatar,
                                  container=container,
                                  coordinates=coordinates)
             # Delete previous avatar from storage
             if 'avatar' in current_user.info:
               uploader.delete_file(current_user.info['avatar'], container)
-            current_user.info = {'avatar': file.filename,
+            current_user.info = {'avatar': avatar.filename,
                                  'container': container}
             db.session.commit()
             cached_users.delete_user_summary(current_user.name)
