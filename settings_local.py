@@ -17,7 +17,7 @@
 # along with PyBossa.  If not, see <http://www.gnu.org/licenses/>.
 import os
 
-DEBUG = False
+DEBUG = bool(os.environ.get('DEBUG', False))
 
 ## webserver host and port
 # HOST = '0.0.0.0'
